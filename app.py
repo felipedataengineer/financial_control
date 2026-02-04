@@ -72,6 +72,33 @@ st.metric("Saldo Atual", saldo('despesas'))
 
 with st.sidebar:
     st.header('tabela')
+    #create tabela
+    import pandas as pd
+
+    dados = {
+        "Banco": ["Banco A", "Banco B", "Banco C", "Corretora", "Carteira"],
+        "Saldo (R$)": [2500, 1820, 7300, 15400, 620]
+    }
+
+    df = pd.DataFrame(dados)
+
+    st.subheader('Saldo')
+    st.dataframe(
+        df
+        .style
+        .format({"Saldo (R$)": "R$ {:,.2f}"})
+        .set_properties(**{
+            "background-color": "#111827",
+            "color": "white",
+            "border": "1px solid #1f2937"
+        })
+        .set_table_styles([{
+            "selector": "th",
+            "props": [("background-color", "#1f2937"), ("color", "white")]
+        }]),
+        hide_index=True,
+        use_container_width=True
+    )
 
 
 def teste():
